@@ -1,0 +1,7 @@
+largeur;10
+hauteur;10
+densité_c_init;10
+proba_infect;0.3
+J_avant_G;2
+taux_mortal;0.3
+densité_conf;2
