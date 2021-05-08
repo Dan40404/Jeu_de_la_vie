@@ -1,6 +1,4 @@
-from parametres import get_largeur
-from parametres import get_hauteur
-from parametres import get_infect_luck
+from parametres import *
 
 def animation_du_quartier(L,x_c,y_c):
     voisin = 0
@@ -22,10 +20,27 @@ def animation_du_quartier(L,x_c,y_c):
 def etat_suivant(etat_cellule,voisin, valeur):
     import random
     dictionnaire_return = {"etat": etat_cellule, "valeur" : valeur}
+    if valeur > 0:
+        dictionnaire_return['valeur'] -= 1
+
+
     if etat_cellule == "saine":
         for i in range(voisin):
             if random.random() <= get_infect_luck():
                 dictionnaire_return['etat'] = 'contaminee'
+                dictionnaire_return['valeur'] = get_J_avant_G()
+
+    if etat_cellule == "contaminee" and valeur == 0:
+        if random.random() < get_taux_mortal():
+            dictionnaire_return['etat'] = 'decedee'
+        else:
+            dictionnaire_return['etat'] = 'immunisee'
+            dictionnaire_return['valeur'] = get_imunne_time()
+
+    if etat_cellule == "immunisee" and valeur == 0:
+        dictionnaire_return['etat'] = 'saine'
+
+
 
 
     return dictionnaire_return

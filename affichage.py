@@ -5,6 +5,10 @@ def couleur_cellule(etat):
         couleur = '\033[92m'
     elif etat == 'contaminee':
         couleur = '\033[91m'
+    elif etat == 'immunisee':
+        couleur = '\033[94m'
+    elif etat == 'decedee':
+        couleur = '\033[30m'
     return couleur
 
 def affichage_simulation(List_simulation):

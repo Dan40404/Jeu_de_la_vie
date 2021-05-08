@@ -34,3 +34,16 @@ def get_hauteur():
 def get_infect_luck():
     parametre = get_parametres()
     return parametre['proba_infect']
+
+def get_J_avant_G():
+    parametre = get_parametres()
+    return parametre['J_avant_G']
+
+def get_taux_mortal():
+    parametre = get_parametres()
+    return parametre['taux_mortal']
+
+def get_imunne_time():
+    parametre = get_parametres()
+    return parametre['imunne_time']
+

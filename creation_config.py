@@ -1,6 +1,4 @@
-from parametres import get_densite_c_init
-from parametres import get_largeur
-from parametres import get_hauteur
+from parametres import *
 
 
 def infect_List():
@@ -41,7 +39,7 @@ def infect(L):
     List_pos_infect = infect_List()
     for i in range(len(List_pos_infect)):
         L[List_pos_infect[i]["y"]][List_pos_infect[i]["x"]]["etat"] = "contaminee"
-
+        L[List_pos_infect[i]["y"]][List_pos_infect[i]["x"]]["valeur"] = get_J_avant_G()
     return L
 
 def creation_simulation():
