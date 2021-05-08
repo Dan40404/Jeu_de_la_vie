@@ -12,24 +12,23 @@ def animation_du_quartier(L,x_c,y_c):
     for i in range(-1,2):
         for j in range(-1,2):
             bord = False
-            if x_c + i < 0 or y_c + j < 0 or x_c + i > get_hauteur() or y_c + j > get_largeur():
+            if x_c + i < 0 or y_c + j < 0 or x_c + i > get_hauteur()-1 or y_c + j > get_largeur()-1:
                 bord = True
-            if (i != 0 or j != 0) and (bord == False) and L[x_c+i][y_c+j]["etat"] == "contaminee":
-                voisin +=1
+            if bord == False:
+                if (i != 0 or j != 0) and L[x_c+i][y_c+j]["etat"] == "contaminee":
+                    voisin +=1
     return voisin
 
-def etat(etat_cellule,voisin, valeur):
+def etat_suivant(etat_cellule,voisin, valeur):
     import random
     dictionnaire_return = {"etat": etat_cellule, "valeur" : valeur}
-    if etat_cellule == "sain":
+    if etat_cellule == "saine":
         for i in range(voisin):
             if random.random() <= get_infect_luck():
                 dictionnaire_return['etat'] = 'contaminee'
 
+
     return dictionnaire_return
-
-
-
 
 
 def transition(L):
@@ -38,4 +37,6 @@ def transition(L):
     for i in range(len(L)):
         for j in range(len(L[i])):
             voisin = animation_du_quartier(L,i,j)
+            H[i].append(etat_suivant(L[i][j]["etat"], voisin, L[i][j]["valeur"]))
+    return H
 

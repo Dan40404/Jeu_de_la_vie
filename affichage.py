@@ -1,6 +1,6 @@
 def couleur_cellule(etat):
     #on definit une fonction pour retourner la couleur en fonction de l'etat dans laquelle on pourra par consequens ajouter des couleur
-    couleur = ''
+    couleur = '\033[92m'
     if etat == 'saine':
         couleur = '\033[92m'
     elif etat == 'contaminee':
