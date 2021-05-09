@@ -31,6 +31,7 @@ def get_hauteur():
     parametre = get_parametres()
     return parametre['hauteur']
 
+#Pour chaque get, on vient chercher une valeur du dictionnaire parametres, cela permet de simplifier le code en lisant facilement la valeur utilisé
 def get_infect_luck():
     parametre = get_parametres()
     return parametre['proba_infect']

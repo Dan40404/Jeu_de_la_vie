@@ -47,3 +47,8 @@ def creation_simulation():
     L = creation_list()
     L = infect(L)
     return L
+
+def creation_stats():
+    return {"contaminee" : get_densite_c_init(), 'immunisee' : 0, 'decedee' : 0, "jour" : 0}
+    # on creer une fonction qui nous renvoie un dictionnaire contenant les clés jour_passe, contaminee, immunisee et decedee
+    # Pour les contaminées, on rajoute la valeur des contaminee de base qui se trouve dans le csv
