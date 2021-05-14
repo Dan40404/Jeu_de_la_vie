@@ -1,16 +1,19 @@
 from parametres import *
 
 
-def infect_List():
-
+def infect_List(parametre):
+    """
+    Fonction determinant les cellules infectées dans notre grille.
+    Elle retourne une liste comprenant les coordonées des cellules à infecter
+    """
     from random import randint
     # cette fonction auxilliaire sert à renvoyer une liste avec toutes les cellules à mettre en état infectée(s)
 
     #la liste renvoyer contiendra les position des cellule qui seront contaminer
     List_position = []
-    densite = get_densite_c_init()
-    largeur = get_largeur()
-    hauteur = get_hauteur()
+    densite = get_densite_c_init(parametre)
+    largeur = get_largeur(parametre)
+    hauteur = get_hauteur(parametre)
 
     for i in range(densite):
         continuer = True
@@ -25,30 +28,34 @@ def infect_List():
 
     return List_position
 
-def creation_list():
-    largeur = get_largeur()
-    hauteur = get_hauteur()
+
+def creation_list(parametre):
+    """
+    Fonction qui affecte l'état initial 'sain' à toutes les cellules ainsi qu'une valeur de 0
+    """
+    largeur = get_largeur(parametre)
+    hauteur = get_hauteur(parametre)
     #On retourne une liste qui à hauteur élement, à l'interieur on creer largeur fois un dictionnaire decrivant son état et une valeur pour les parametres comme le
     #taux de mortalité, confinement etc...
     L = [[{'etat' : 'saine', 'valeur' : 0} for a in range(largeur)] for i in range(hauteur)]
     return L
 
-def infect(L):
+def infect(L,parametre):
     #on récupere une liste sans modification et une list avec des cellules a infecter, on les infecte ensuite via une boucle qui va rechercher la clés état de nos cellules à contaminer
     #notre liste modifié avec les bonnes cellules inféctés est ensuite retourné
-    List_pos_infect = infect_List()
+    List_pos_infect = infect_List(parametre)
     for i in range(len(List_pos_infect)):
         L[List_pos_infect[i]["y"]][List_pos_infect[i]["x"]]["etat"] = "contaminee"
-        L[List_pos_infect[i]["y"]][List_pos_infect[i]["x"]]["valeur"] = get_J_avant_G()
+        L[List_pos_infect[i]["y"]][List_pos_infect[i]["x"]]["valeur"] = get_J_avant_G(parametre)
     return L
 
-def creation_simulation():
+def creation_simulation(parametre):
     # on creer une fonction qui nous renvoie la liste de départ de la simulation
-    L = creation_list()
-    L = infect(L)
+    L = creation_list(parametre)
+    L = infect(L,parametre)
     return L
 
-def creation_stats():
-    return {"contaminee" : get_densite_c_init(), 'immunisee' : 0, 'decedee' : 0, "jour" : 0}
+def creation_stats(parametre):
+    return {"contaminee" : get_densite_c_init(parametre), 'immunisee' : 0, 'decedee' : 0, "jour" : 0}
     # on creer une fonction qui nous renvoie un dictionnaire contenant les clés jour_passe, contaminee, immunisee et decedee
     # Pour les contaminées, on rajoute la valeur des contaminee de base qui se trouve dans le csv

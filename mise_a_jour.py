@@ -1,6 +1,13 @@
 from parametres import *
 
 def animation_du_quartier(L,x_c,y_c):
+    """
+    Fonction qui permet de determiner le nombre de cellules contaminées touchant une cellule.
+    On retourne le nombre de voisins infectés.
+    @parametre 1 : (list) liste des etats des cellules
+    @parametre 2 : (int) numéro de colonne de la cellule dont on cherche les voisins infectés
+    @parametre 3 : (int) numéro de ligne de la cellule dont on cherche les voisins infectés
+    """
     voisin = 0
     #on parcoure les cellules voisines aux positions suivantes : pour une cellule de Position C(i,j) ses voisins sont A(i-1, j-1), A’(i-1, j), B(i-1, j + 1), B’(i, j-1), C’(i,j+1), D(i+1, j-1), D’(i+1, j), E(i+1, j + 1)
     #on va parcoure toutes les cellules voisines et faire les verifications suivante :
@@ -18,6 +25,13 @@ def animation_du_quartier(L,x_c,y_c):
     return voisin
 
 def etat_suivant(etat_cellule,voisin, valeur, Stats):
+    """
+    Fonction permettant d'affecter un nouvel état à chaque cellule apres un tour. 
+    @parametre 1 : (string) etat de la cellule
+    @parametre 2 : (int) nombre de voisins infectés de la cellule
+    @parametre 3 : (int) nombre de jours depuis sa contamination
+    @parametre 4 : (dict) dictionnaire comportant le nombre de cellules saines, infectées, mortes et le nombre du jour
+    """
     import random
     #on creer un dictionnaire identique à celui de la cellule, que nous allons modifier puis retourner
     dictionnaire_return = {"etat": etat_cellule, "valeur" : valeur}
@@ -57,6 +71,11 @@ def etat_suivant(etat_cellule,voisin, valeur, Stats):
 
 
 def transition(L, Stats):
+    """
+    Fonction qui permet de faire une nouvelle grille avec les nouvelles informations obtenues grace à etat_suivant.
+    @parametre 1 : (list) liste de dictionnaires des etats de toutes les cellules
+    @parametre 2 : (dict) dictionnaire comportant le nombre de cellules saines, infectées, mortes et le nombre du jour
+    """
     H = [[] for i in range(get_largeur())]
     #on creer une liste a deux dimension identique à celle de base
 

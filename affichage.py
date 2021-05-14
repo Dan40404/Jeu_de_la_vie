@@ -1,3 +1,6 @@
+
+from import_export import *
+
 def couleur_cellule(etat):
     #on definit une fonction pour retourner la couleur en fonction de l'etat dans laquelle on pourra par consequens ajouter des couleur
     couleur = '\033[92m'
@@ -19,3 +22,7 @@ def affichage_simulation(List_simulation):
             print(couleur + "o", end=" ")
 
         print()
+        
+def parametrage_menu(parametres_initiaux):
+    for cle in parametres_initiaux:
+        print(cle,':', parametres_initiaux[cle])
