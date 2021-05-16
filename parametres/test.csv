@@ -1,8 +1,8 @@
 largeur;10
 hauteur;10
-densité_c_init;10
-proba_infect;0.3
+densite_c_init;0.05
+proba_infect;0.5
 J_avant_G;2
 taux_mortal;0.02
-densité_conf;2
+densite_conf;2
 imunne_time;4

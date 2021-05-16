@@ -1,5 +1,6 @@
 
 from import_export import *
+from parametres import *
 
 def couleur_cellule(etat):
     #on definit une fonction pour retourner la couleur en fonction de l'etat dans laquelle on pourra par consequens ajouter des couleur
@@ -23,6 +24,64 @@ def affichage_simulation(List_simulation):
 
         print()
         
+        
+        
+        
+
 def parametrage_menu(parametres_initiaux):
     for cle in parametres_initiaux:
         print(cle,':', parametres_initiaux[cle])
+    choix = False
+    liste_cles = []
+    for cle in parametres_initiaux:
+        liste_cles.append(cle)
+    
+    while choix == False :
+        while True :
+            changement = input("Quel paramètre voulez-vous changer ? : ")
+            if changement in liste_cles :
+                for cle in parametres_initiaux:
+                    if cle == changement :
+                        nvlle_valeur = input("Quelle valeur souhaitez vous lui assigner ? : ")
+                        if changement in ['proba_infect','densite_c_init']:
+                            while changement == 'proba_infect' and ( float(nvlle_valeur) > 1 or float(nvlle_valeur) < 0 ) :
+                                nvlle_valeur = float(input("Une probabilité ne peut être comprise qu'entre 0 et 1 : "))
+                           
+                            while changement == 'densite_c_init' and ( float(nvlle_valeur) > 1 or float(nvlle_valeur) < 0 ) :
+                                nvlle_valeur = float(input("Une densité ne peut être comprise qu'entre 0 et 1 : "))
+                            nvlle_valeur = float(nvlle_valeur)
+                        else:
+                            nvlle_valeur = int(nvlle_valeur)
+                            
+                        parametres_initiaux[cle] = nvlle_valeur
+                        for cle in parametres_initiaux:
+                            print(cle,':', parametres_initiaux[cle])
+                break
+                
+            else:
+                print("Entrée invalide. Veuillez saisir autre chose : ")
+        question_ok = 0
+        while question_ok == 0 :
+            question = input("Voulez-vous changer la valeur d'autres parametres ? (o/n) : ")
+            if question == 'n' :
+                choix = True
+                question_ok = 1
+            elif question == 'o' :
+                question_ok = 1
+        
+    for cle in parametres_initiaux:
+        print(cle,':', parametres_initiaux[cle])
+        
+    return parametres_initiaux
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+

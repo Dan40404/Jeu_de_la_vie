@@ -1,4 +1,6 @@
 # fichier pour l'import / export du fichier .csv
+import csv
+import globals
 
 def choisir_fichier():
     """
@@ -21,7 +23,7 @@ def get_parametres():
     Fonction permettant d'extraire les informations contenues dans le fichier .csv 
     sous la forme d'un dictionnaire
     """
-    import csv
+    print('fonction entree',globals.parametre)
     #on import le module qui nous permet d'ouvrir un fichier csv
     file = open("parametres/" + choisir_fichier())
     fichier_demander = csv.reader(file,delimiter=";")
@@ -38,6 +40,22 @@ def get_parametres():
             Parametres_grille[(ligne[0])] = int(ligne[1])
         except:
             Parametres_grille[(ligne[0])] = float(ligne[1])
+    globals.parametre = Parametres_grille
+    print('fonction',globals.parametre)
 
-    return Parametres_grille
 
+def write_parametre_fichier(parametres):
+    # dans quel fichier on écrit ?
+    with open('parametres/test.csv', 'w', newline='') as fichier_csv :
+        parametre_write = csv.writer(fichier_csv, delimiter=';')
+        for cle in parametres:
+            parametre = parametres[cle]
+            parametre_write.writerow([cle] + [parametre])
+
+
+
+
+
+
+
+        
