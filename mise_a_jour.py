@@ -87,3 +87,27 @@ def transition(L, Stats):
             #Une fois que la nouvelle List est complete, on la return
     return H
 
+
+def suivi_statistique(Stats):
+    print(Stats)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -23,6 +23,6 @@ for i in range(15):
     affichage_simulation(L)
     Stats["jour"] += 1
     print('\033[0m')
-    print(Stats)
+    suivi_statistique(Stats)
     L = transition(L, Stats)
 

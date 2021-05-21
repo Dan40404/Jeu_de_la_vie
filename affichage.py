@@ -29,8 +29,17 @@ def affichage_simulation(List_simulation):
         
 
 def parametrage_menu(parametres_initiaux):
+    """
+    Fonction affichant un menu pour que l'utilisateur puisse choisir le CSV à ouvrir et dans quel fichier il voudrais 
+    sauvegarder ses parametres ou sa partie
+    - parametres_initiaux : liste des parametres contenus dans le fichier csv
+    """
+    #affichage des parametres modifiables
+    n = 0
     for cle in parametres_initiaux:
-        print(cle,':', parametres_initiaux[cle])
+        print(n, "...", cle,':', parametres_initiaux[cle])
+        
+    #on cree un liste des clés des parametres
     choix = False
     liste_cles = []
     for cle in parametres_initiaux:
@@ -39,6 +48,28 @@ def parametrage_menu(parametres_initiaux):
     while choix == False :
         while True :
             changement = input("Quel paramètre voulez-vous changer ? : ")
+#            if changement > 0 and changement < n :
+#                for i in range(len(liste_cles)):
+#                    if i == n :
+#                        nvlle_valeur = input("Quelle valeur souhaitez vous lui assigner ? : ")
+#                        
+#                        if changement == 2 or changement == 3 :
+#                            while changement == 2 and ( float(nvlle_valeur) > 1 or float(nvlle_valeur) < 0 ) :
+#                                nvlle_valeur = float(input("Une probabilité ne peut être comprise qu'entre 0 et 1 : "))
+#                           
+#                            while changement == 3 and ( float(nvlle_valeur) > 1 or float(nvlle_valeur) < 0 ) :
+#                                nvlle_valeur = float(input("Une densité ne peut être comprise qu'entre 0 et 1 : "))
+#                            nvlle_valeur = float(nvlle_valeur)
+#                        else:
+#                            nvlle_valeur = int(nvlle_valeur)
+                            
+                        
+            
+            
+            
+            
+            
+            
             if changement in liste_cles :
                 for cle in parametres_initiaux:
                     if cle == changement :
