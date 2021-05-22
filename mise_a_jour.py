@@ -76,7 +76,7 @@ def transition(L, Stats):
     @parametre 1 : (list) liste de dictionnaires des etats de toutes les cellules
     @parametre 2 : (dict) dictionnaire comportant le nombre de cellules saines, infectées, mortes et le nombre du jour
     """
-    H = [[] for i in range(get_largeur())]
+    H = [[] for i in range(get_hauteur())]
     #on creer une liste a deux dimension identique à celle de base
 
     for i in range(len(L)):
