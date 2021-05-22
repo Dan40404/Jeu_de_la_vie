@@ -26,7 +26,14 @@ def affichage_simulation(List_simulation):
         
         
         
-        
+def affichage_menu_parametres(parametres):
+    """affichage des parametres avec un numero"""
+    n = 0
+    #on cree un liste des clés des parametres
+    for cle in parametres:
+        print(n, "...", cle,':', parametres[cle])
+        n = n+1
+    
 
 def parametrage_menu(parametres_initiaux):
     """
@@ -34,64 +41,55 @@ def parametrage_menu(parametres_initiaux):
     sauvegarder ses parametres ou sa partie
     - parametres_initiaux : liste des parametres contenus dans le fichier csv
     """
-    #affichage des parametres modifiables
-    n = 0
-    for cle in parametres_initiaux:
-        print(n, "...", cle,':', parametres_initiaux[cle])
-        
+
     #on cree un liste des clés des parametres
-    choix = False
     liste_cles = []
     for cle in parametres_initiaux:
         liste_cles.append(cle)
-    
+        
+    choix = False    
     while choix == False :
         while True :
-            changement = input("Quel paramètre voulez-vous changer ? : ")
-#            if changement > 0 and changement < n :
-#                for i in range(len(liste_cles)):
-#                    if i == n :
-#                        nvlle_valeur = input("Quelle valeur souhaitez vous lui assigner ? : ")
-#                        
-#                        if changement == 2 or changement == 3 :
-#                            while changement == 2 and ( float(nvlle_valeur) > 1 or float(nvlle_valeur) < 0 ) :
-#                                nvlle_valeur = float(input("Une probabilité ne peut être comprise qu'entre 0 et 1 : "))
-#                           
-#                            while changement == 3 and ( float(nvlle_valeur) > 1 or float(nvlle_valeur) < 0 ) :
-#                                nvlle_valeur = float(input("Une densité ne peut être comprise qu'entre 0 et 1 : "))
-#                            nvlle_valeur = float(nvlle_valeur)
-#                        else:
-#                            nvlle_valeur = int(nvlle_valeur)
-                            
-                        
-            
-            
-            
-            
-            
-            
-            if changement in liste_cles :
-                for cle in parametres_initiaux:
-                    if cle == changement :
-                        nvlle_valeur = input("Quelle valeur souhaitez vous lui assigner ? : ")
-                        if changement in ['proba_infect','densite_c_init']:
-                            while changement == 'proba_infect' and ( float(nvlle_valeur) > 1 or float(nvlle_valeur) < 0 ) :
-                                nvlle_valeur = float(input("Une probabilité ne peut être comprise qu'entre 0 et 1 : "))
-                           
-                            while changement == 'densite_c_init' and ( float(nvlle_valeur) > 1 or float(nvlle_valeur) < 0 ) :
-                                nvlle_valeur = float(input("Une densité ne peut être comprise qu'entre 0 et 1 : "))
-                            nvlle_valeur = float(nvlle_valeur)
-                        else:
-                            nvlle_valeur = int(nvlle_valeur)
-                            
-                        parametres_initiaux[cle] = nvlle_valeur
-                        for cle in parametres_initiaux:
-                            print(cle,':', parametres_initiaux[cle])
+            affichage_menu_parametres(parametres_initiaux)
+
+            changement = input("Quel numéro de paramètre voulez-vous changer ? (appuyez sur 'ENTREE' si aucun) : ")
+            if changement == '':
+                choix = True
+                break                          
+            cle = liste_cles[int(changement)]
+
+            try:
+                cle = liste_cles[int(changement)]
+            except:
+                print("Entrée invalide. Veuillez saisir autre chose")
                 break
-                
+            print("Vous avez choisi de modifier", cle, ":", parametres_initiaux[cle])
+            nvlle_valeur = input("Quelle valeur souhaitez vous lui assigner ? : ")
+            if cle in ['proba_infect','densite_c_init','taux_mortal']:
+                while cle == 'proba_infect' and ( float(nvlle_valeur) > 1 or float(nvlle_valeur) < 0 ) :
+                    nvlle_valeur = float(input("Une probabilité ne peut être comprise qu'entre 0 et 1 : "))
+                       
+                while cle == 'densite_c_init' and ( float(nvlle_valeur) > 1 or float(nvlle_valeur) < 0 ) :
+                    nvlle_valeur = float(input("Une densité ne peut être comprise qu'entre 0 et 1 : "))
+
+                while cle == 'taux_mortal' and ( float(nvlle_valeur) > 1 or float(nvlle_valeur) < 0 ) :
+                    nvlle_valeur = float(input("Un taux ne peut être compris qu'entre 0 et 1 : "))
+
+                nvlle_valeur = float(nvlle_valeur)
             else:
-                print("Entrée invalide. Veuillez saisir autre chose : ")
+                # si on a rentré du texte, on recommence ! 
+                try:
+                    nvlle_valeur = int(nvlle_valeur)
+                except:
+                    print("Entrée invalide. Veuillez saisir autre chose")
+                    break                    
+                parametres_initiaux[cle] = nvlle_valeur
+            break
+                
+
         question_ok = 0
+        if changement == '':
+            question_ok = 1
         while question_ok == 0 :
             question = input("Voulez-vous changer la valeur d'autres parametres ? (o/n) : ")
             if question == 'n' :
@@ -104,15 +102,3 @@ def parametrage_menu(parametres_initiaux):
         print(cle,':', parametres_initiaux[cle])
         
     return parametres_initiaux
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-

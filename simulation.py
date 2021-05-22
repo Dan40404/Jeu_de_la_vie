@@ -13,7 +13,7 @@ parametres_nouveaux = parametrage_menu(globals.parametre)
 # TODO: mettre en option ligne en dessous 
 # TODO: proteger saisie utilisateur ( ../ )
 
-write_parametre_fichier(parametres_nouveaux)
+sauvegarde_parametres(parametres_nouveaux)
 globals.parametre = parametres_nouveaux
 Stats = creation_stats()
 L = creation_simulation()
@@ -26,3 +26,4 @@ for i in range(15):
     suivi_statistique(Stats)
     L = transition(L, Stats)
 
+input()
