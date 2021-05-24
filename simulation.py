@@ -1,3 +1,5 @@
+#fichier principal
+
 import globals
 from creation_config import *
 from affichage import *
@@ -10,8 +12,6 @@ globals.initialize()
 get_parametres()
 parametres_nouveaux = parametrage_menu(globals.parametre)
 
-# TODO: mettre en option ligne en dessous 
-# TODO: proteger saisie utilisateur ( ../ )
 
 sauvegarde_parametres(parametres_nouveaux)
 globals.parametre = parametres_nouveaux

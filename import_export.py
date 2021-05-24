@@ -10,7 +10,7 @@ def choisir_fichier():
     import os
     liste_fichiers = os.listdir('parametres')
     i=1
-    for fichier in liste_fichiers:
+    for fichier in liste_fichiers: # on affiche les fichiers
         print('[' + str(i) + '] ' + fichier)
         i+= 1
 
@@ -25,7 +25,7 @@ def choisir_fichier():
         if(numero < 0):
             print("ce numero n'existe pas!")
         else:
-            try:
+            try: # on regarde si le numéro entré correspond bien à un fichier
                 return liste_fichiers[numero]
             except:
                 print("ce numéro n'existe pas!")
@@ -36,7 +36,6 @@ def get_parametres():
     Fonction permettant d'extraire les informations contenues dans le fichier .csv 
     sous la forme d'un dictionnaire
     """
-#    print('fonction entree',globals.parametre)
     #on import le module qui nous permet d'ouvrir un fichier csv
     file = open("parametres/" + choisir_fichier())
     fichier_demander = csv.reader(file,delimiter=";")
@@ -54,11 +53,14 @@ def get_parametres():
         except:
             Parametres_grille[(ligne[0])] = float(ligne[1])
     globals.parametre = Parametres_grille
-#    print('fonction',globals.parametre)
 
 
 def write_parametre_fichier(parametres,fichier):
-    # dans quel fichier on écrit ?
+    """
+    Fonction permettant d'écrire dans un fichier .csv
+    - parametres : dictionnaire des parametres
+    - fichier : nom du fichier où l'utilisateur veut sauvegarder ses parametres
+    """
     with open('parametres/' + fichier, 'w', newline='') as fichier_csv :
         parametre_write = csv.writer(fichier_csv, delimiter=';')
         for cle in parametres:
@@ -77,7 +79,7 @@ def sauvegarde_parametres(parametres):
 
     choix = input('Souhaitez-vous créer un nouveau fichier? o/n :')
     if choix == 'n':
-        fichier = choix_fichier()
+        fichier = choisir_fichier()
     else:
         fichier = input('Nom du nouveau fichier: ')
         # si l'utilisateur ne rentre pas de nom, on le fait sortir

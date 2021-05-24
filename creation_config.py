@@ -43,7 +43,7 @@ def creation_list():
     hauteur = get_hauteur()
     #On retourne une liste qui à hauteur élement, à l'interieur on creer largeur fois un dictionnaire decrivant son état et une valeur pour les parametres comme le
     #taux de mortalité, confinement etc...
-    L = [[{'etat' : 'saine', 'valeur' : 0} for a in range(largeur)] for i in range(hauteur)]
+    L = [[{'etat' : 'saine', 'valeur' : 0, 'temps' : 0} for a in range(largeur)] for i in range(hauteur)]
     return L
 
 def infect(L):

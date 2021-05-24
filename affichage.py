@@ -4,16 +4,22 @@ from parametres import *
 
 def couleur_cellule(etat):
     #on definit une fonction pour retourner la couleur en fonction de l'etat dans laquelle on pourra par consequens ajouter des couleur
-    couleur = '\033[92m'
+    class bcolors:
+        SAINE = '\033[92m'
+        CONTAMINEE = '\033[91m'
+        IMMUNISEE = '\033[94m'
+        DECEDEE = '\033[30m'
+    
     if etat == 'saine':
-        couleur = '\033[92m'
+        couleur = bcolors.SAINE
     elif etat == 'contaminee':
-        couleur = '\033[91m'
+        couleur = bcolors.CONTAMINEE
     elif etat == 'immunisee':
-        couleur = '\033[94m'
+        couleur = bcolors.IMMUNISEE
     elif etat == 'decedee':
-        couleur = '\033[30m'
+        couleur = bcolors.DECEDEE
     return couleur
+
 
 def affichage_simulation(List_simulation):
     for i in range(len(List_simulation)):
@@ -37,8 +43,8 @@ def affichage_menu_parametres(parametres):
 
 def parametrage_menu(parametres_initiaux):
     """
-    Fonction affichant un menu pour que l'utilisateur puisse choisir le CSV à ouvrir et dans quel fichier il voudrais 
-    sauvegarder ses parametres ou sa partie
+    Fonction affichant un menu pour que l'utilisateur puisse choisir les parametres qu'il voudrait
+    modifier et sauvegarder.
     - parametres_initiaux : liste des parametres contenus dans le fichier csv
     """
 
@@ -49,34 +55,41 @@ def parametrage_menu(parametres_initiaux):
         
     choix = False    
     while choix == False :
-        while True :
-            affichage_menu_parametres(parametres_initiaux)
+        while True : 
+            affichage_menu_parametres(parametres_initiaux) # on affiche les parametres et leur valeur
 
             changement = input("Quel numéro de paramètre voulez-vous changer ? (appuyez sur 'ENTREE' si aucun) : ")
-            if changement == '':
+            if changement == '': # si l'utilisateur ne veut rien changer, il peut faire ENTREE
                 choix = True
                 break                          
             cle = liste_cles[int(changement)]
 
-            try:
+            try: # avec le try/except, on verifie que le nombre saisi par l'utilisateur correspond bien à un parametre
                 cle = liste_cles[int(changement)]
             except:
-                print("Entrée invalide. Veuillez saisir autre chose")
+                print("Entrée invalide. Veuillez saisir autre chose") # sinon, on lui demande de ressaisir
                 break
+            
             print("Vous avez choisi de modifier", cle, ":", parametres_initiaux[cle])
             nvlle_valeur = input("Quelle valeur souhaitez vous lui assigner ? : ")
-            if cle in ['proba_infect','densite_c_init','taux_mortal']:
+            
+            if cle in ['proba_infect','densite_c_init','taux_mortal']: # cette condition concerne les parametres ayant comme valeur un nombre décimal
+                # on teste la probabilité d'infection
                 while cle == 'proba_infect' and ( float(nvlle_valeur) > 1 or float(nvlle_valeur) < 0 ) :
                     nvlle_valeur = float(input("Une probabilité ne peut être comprise qu'entre 0 et 1 : "))
-                       
+                
+                # on teste la densité de cellules infectees initialement
                 while cle == 'densite_c_init' and ( float(nvlle_valeur) > 1 or float(nvlle_valeur) < 0 ) :
                     nvlle_valeur = float(input("Une densité ne peut être comprise qu'entre 0 et 1 : "))
 
+                # on teste le taux de mortalité
                 while cle == 'taux_mortal' and ( float(nvlle_valeur) > 1 or float(nvlle_valeur) < 0 ) :
                     nvlle_valeur = float(input("Un taux ne peut être compris qu'entre 0 et 1 : "))
-
+                    
+                # apres tous ces tests, on affecte la valeur entrée par l'utilisateur à une variable
                 nvlle_valeur = float(nvlle_valeur)
-            else:
+            
+            else: # si cle ne correspond pas aux parametres speciaux, on regarde si la nouvelle valeur est bien un entier
                 # si on a rentré du texte, on recommence ! 
                 try:
                     nvlle_valeur = int(nvlle_valeur)
@@ -84,12 +97,12 @@ def parametrage_menu(parametres_initiaux):
                     print("Entrée invalide. Veuillez saisir autre chose")
                     break                    
                 parametres_initiaux[cle] = nvlle_valeur
-            break
+            break # on sort du while
                 
 
         question_ok = 0
         if changement == '':
-            question_ok = 1
+            question_ok = 1 # on fait en sorte de ne pas demander de changer d'autres parametres si l'utilisateur à passé dès le debut
         while question_ok == 0 :
             question = input("Voulez-vous changer la valeur d'autres parametres ? (o/n) : ")
             if question == 'n' :
@@ -98,7 +111,7 @@ def parametrage_menu(parametres_initiaux):
             elif question == 'o' :
                 question_ok = 1
         
-    for cle in parametres_initiaux:
+    for cle in parametres_initiaux: # on affiche les paramètres retenus
         print(cle,':', parametres_initiaux[cle])
         
-    return parametres_initiaux
+    return parametres_initiaux # on retournele dictionnaire des parametres
