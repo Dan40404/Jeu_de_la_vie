@@ -38,11 +38,11 @@ def etat_suivant(etat_cellule, voisin, valeur, Stats, temps):
     if valeur > 0:
         #si la valeur est > 0 on enlève 1, qui correspond à un jour (d'immunité, de contamination etc...)
         dictionnaire_return['valeur'] -= 1
+    # on dit d'office que la cellule est dans son etat un jour de plus et si cela s'avère faux, on réinitialisera à 0 dans la condition correspondante
+    dictionnaire_return['temps'] += 1
 
 
-    if etat_cellule == "saine":
-        save_temps = dictionnaire_return['temps']
-        
+    if etat_cellule == "saine":        
         for i in range(voisin):
             #on relance la proba autant de fois qu'il y a de voisin
             #on genere un nombre au hasard, si on se trouve sur l'intervalle de [0;get_infect_luck()[ alors on infecte la cellule ayant un ou plusieurs voisin(s) infectée(s)
@@ -52,26 +52,26 @@ def etat_suivant(etat_cellule, voisin, valeur, Stats, temps):
                 dictionnaire_return['valeur'] = get_J_avant_G()
                 dictionnaire_return['temps'] = 0 # la cellule devient contaminee donc son compteur est remit à 0
                 break # on sort de la boucle Pour afin d'éviter de compter plusieurs fois la cellule comme contaminée
-            
-        if dictionnaire_return['temps'] == save_temps: # si la valeur de temps n'a pas changer, c'est que la cellule est toujours saine, donc on ajoute 1
-            dictionnaire_return['temps'] += 1
-                
+
 
     if etat_cellule == "contaminee" and valeur == 0:
         #si la cellule est contaminé on declare que la cellule peut mourrir avec une probabilité get_taux_mortal(), sinon elle devient immunisé
+        
         if random.random() < get_taux_mortal():
             Stats["decedee"] += 1
             dictionnaire_return['etat'] = 'decedee'
-            dictionnaire_return['temps'] += 1 
+            dictionnaire_return['temps'] = 0 
         else:
             Stats["immunisee"] += 1
             dictionnaire_return['etat'] = 'immunisee'
             dictionnaire_return['valeur'] = get_imunne_time()
-            dictionnaire_return['temps'] += 1
+            dictionnaire_return['temps'] = 0
+        
 
     if etat_cellule == "immunisee" and valeur == 0:
         #A la fin de sa période d'imunité, la cellule redevient saine
         dictionnaire_return['etat'] = 'saine'
+        dictionnaire_return['temps'] = 0
 
     return dictionnaire_return
 

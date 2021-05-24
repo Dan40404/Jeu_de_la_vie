@@ -19,7 +19,7 @@ Stats = creation_stats()
 L = creation_simulation()
 
 
-for i in range(15):
+for i in range(30):
     affichage_simulation(L)
     Stats["jour"] += 1
     print('\033[0m')
@@ -27,3 +27,5 @@ for i in range(15):
     L = transition(L, Stats)
 
 input()
+
+# TODO : apres modif dans mise_a_jour sur les differents temps, on ne peut contaminer et immuniser que l*L cellules donc pas normal

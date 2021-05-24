@@ -16,7 +16,7 @@ def choisir_fichier():
 
     while True:
         try:
-            numero = int(input('quel numéro de fichier choisissez-vous ?')) -1
+            numero = int(input('Quel numéro de fichier choisissez-vous ? : ')) -1
         except:
             # si le numéro n'est pas un entier, on aura une exception sur le return
             # il n'est donc pas necessaire de "gérer" ici
@@ -72,12 +72,12 @@ def sauvegarde_parametres(parametres):
     """demande à l'utilisateur s'il souhaite sauvegarder les parametres.
     lui demande quel fichier, et écrase le fichier si besoin"""
     
-    choix = input('Souhaitez-vous sauvegarder ces paramètres ? o/n :')
+    choix = input('Souhaitez-vous sauvegarder ces paramètres ? o/n : ')
     if choix == 'n':
         print('Paramètres non sauvegardés')
         return
 
-    choix = input('Souhaitez-vous créer un nouveau fichier? o/n :')
+    choix = input('Souhaitez-vous créer un nouveau fichier? o/n : ')
     if choix == 'n':
         fichier = choisir_fichier()
     else:
