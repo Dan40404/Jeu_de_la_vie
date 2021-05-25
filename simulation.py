@@ -29,3 +29,6 @@ for i in range(30):
 input()
 
 # TODO : apres modif dans mise_a_jour sur les differents temps, on ne peut contaminer et immuniser que l*L cellules donc pas normal
+
+# TODO : maintenant, on contamine que L*l et toutes les valeurs décroissent jusqu'à 0 et ne remontent jamais
+

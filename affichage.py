@@ -1,23 +1,24 @@
 
 from import_export import *
 from parametres import *
+from termcolor import colored
 
 def couleur_cellule(etat):
     #on definit une fonction pour retourner la couleur en fonction de l'etat dans laquelle on pourra par consequens ajouter des couleur
-    class bcolors:
-        SAINE = '\033[92m'
-        CONTAMINEE = '\033[91m'
-        IMMUNISEE = '\033[94m'
-        DECEDEE = '\033[30m'
+#    class bcolors:
+#        SAINE = '\033[92m'
+#        CONTAMINEE = '\033[91m'
+#        IMMUNISEE = '\033[94m'
+#        DECEDEE = '\033[30m'
     
     if etat == 'saine':
-        couleur = bcolors.SAINE
+        couleur = 'green'#bcolors.SAINE
     elif etat == 'contaminee':
-        couleur = bcolors.CONTAMINEE
+        couleur = 'red'#bcolors.CONTAMINEE
     elif etat == 'immunisee':
-        couleur = bcolors.IMMUNISEE
+        couleur = 'blue'#bcolors.IMMUNISEE
     elif etat == 'decedee':
-        couleur = bcolors.DECEDEE
+        couleur = 'white'#bcolors.DECEDEE
     return couleur
 
 
@@ -26,7 +27,7 @@ def affichage_simulation(List_simulation):
         #la valeur i correspond à la hauteur à laquelle on se situe lorsqu'on parcoure notre cellule de position j
         for j in range(len(List_simulation[i])):
             couleur = couleur_cellule(List_simulation[i][j]["etat"])
-            print(couleur + "o", end=" ")
+            print( colored("o", couleur), end=" ")
 
         print()
         
@@ -61,8 +62,7 @@ def parametrage_menu(parametres_initiaux):
             changement = input("Quel numéro de paramètre voulez-vous changer ? (appuyez sur 'ENTREE' si aucun) : ")
             if changement == '': # si l'utilisateur ne veut rien changer, il peut faire ENTREE
                 choix = True
-                break                          
-            cle = liste_cles[int(changement)]
+                break
 
             try: # avec le try/except, on verifie que le nombre saisi par l'utilisateur correspond bien à un parametre
                 cle = liste_cles[int(changement)]
@@ -96,7 +96,7 @@ def parametrage_menu(parametres_initiaux):
                 except:
                     print("Entrée invalide. Veuillez saisir autre chose")
                     break                    
-                parametres_initiaux[cle] = nvlle_valeur
+            parametres_initiaux[cle] = nvlle_valeur
             break # on sort du while
                 
 
@@ -115,3 +115,24 @@ def parametrage_menu(parametres_initiaux):
         print(cle,':', parametres_initiaux[cle])
         
     return parametres_initiaux # on retournele dictionnaire des parametres
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

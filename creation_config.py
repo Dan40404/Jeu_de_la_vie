@@ -62,9 +62,10 @@ def creation_simulation():
     return L
 
 def creation_stats():
-    contaminee = int(get_densite_c_init() * get_largeur() * get_hauteur())
-    if contaminee == 0:
-        contaminee = 1 # on veut au moins une cellule contaminée au début
-    return {"contaminee" : contaminee, 'immunisee' : 0, 'decedee' : 0, "jour" : 0}
+    contaminees = int(get_densite_c_init() * get_largeur() * get_hauteur())
+    if contaminees == 0:
+        contaminees = 1 # on veut au moins une cellule contaminée au début
+    saines = ( get_largeur() * get_hauteur() ) - contaminees
+    return {"saines" : saines, "contaminees" : contaminees, 'immunisees' : 0, 'decedees' : 0, "jour" : 0}
     # on creer une fonction qui nous renvoie un dictionnaire contenant les clés jour_passe, contaminee, immunisee et decedee
     # Pour les contaminées, on rajoute la valeur des contaminee de base qui se trouve dans le csv

@@ -47,7 +47,8 @@ def etat_suivant(etat_cellule, voisin, valeur, Stats, temps):
             #on relance la proba autant de fois qu'il y a de voisin
             #on genere un nombre au hasard, si on se trouve sur l'intervalle de [0;get_infect_luck()[ alors on infecte la cellule ayant un ou plusieurs voisin(s) infectée(s)
             if random.random() < get_infect_luck():
-                Stats["contaminee"] += 1
+                Stats["contaminees"] += 1
+                Stats["saines"] -= 1
                 dictionnaire_return['etat'] = 'contaminee'
                 dictionnaire_return['valeur'] = get_J_avant_G()
                 dictionnaire_return['temps'] = 0 # la cellule devient contaminee donc son compteur est remit à 0
@@ -58,11 +59,13 @@ def etat_suivant(etat_cellule, voisin, valeur, Stats, temps):
         #si la cellule est contaminé on declare que la cellule peut mourrir avec une probabilité get_taux_mortal(), sinon elle devient immunisé
         
         if random.random() < get_taux_mortal():
-            Stats["decedee"] += 1
+            Stats["decedees"] += 1
+            Stats["contaminees"] -= 1
             dictionnaire_return['etat'] = 'decedee'
             dictionnaire_return['temps'] = 0 
         else:
-            Stats["immunisee"] += 1
+            Stats["immunisees"] += 1
+            Stats["contaminees"] -= 1
             dictionnaire_return['etat'] = 'immunisee'
             dictionnaire_return['valeur'] = get_imunne_time()
             dictionnaire_return['temps'] = 0
@@ -71,6 +74,8 @@ def etat_suivant(etat_cellule, voisin, valeur, Stats, temps):
     if etat_cellule == "immunisee" and valeur == 0:
         #A la fin de sa période d'imunité, la cellule redevient saine
         dictionnaire_return['etat'] = 'saine'
+        Stats["saines"] += 1
+        Stats["immunisees"] -= 1
         dictionnaire_return['temps'] = 0
 
     return dictionnaire_return
