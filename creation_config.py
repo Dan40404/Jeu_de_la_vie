@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from parametres import *
 import globals
 

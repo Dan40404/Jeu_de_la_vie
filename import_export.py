@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # fichier pour l'import / export du fichier .csv
 import csv
 import globals
@@ -14,21 +15,26 @@ def choisir_fichier():
         print('[' + str(i) + '] ' + fichier)
         i+= 1
 
-    while True:
+    demander = True
+    while demander:
+        demander = False
         try:
-            numero = int(input('Quel numéro de fichier choisissez-vous ? : ')) -1
+            numero = int(input('Choix du fichier de paramètres: quel numéro de fichier choisissez-vous ? : ')) -1
         except:
             # si le numéro n'est pas un entier, on aura une exception sur le return
             # il n'est donc pas necessaire de "gérer" ici
-            pass      
-        # on ne veut pas de numéro négatif
-        if(numero < 0):
-            print("ce numero n'existe pas!")
-        else:
-            try: # on regarde si le numéro entré correspond bien à un fichier
-                return liste_fichiers[numero]
-            except:
-                print("ce numéro n'existe pas!")
+            demander = True      
+        if demander == False: # on ne refait pas la boucle, donc on traite
+            # on ne veut pas de numéro négatif
+            if(numero < 0):
+                print("ce numero n'existe pas!")
+                demander = True
+            else:
+                try: # on regarde si le numéro entré correspond bien à un fichier
+                    return liste_fichiers[numero]
+                except:
+                    print("ce numéro n'existe pas!")
+                    demander = True
 
 
 def get_parametres():
@@ -73,7 +79,7 @@ def sauvegarde_parametres(parametres):
     lui demande quel fichier, et écrase le fichier si besoin"""
     
     choix = input('Souhaitez-vous sauvegarder ces paramètres ? o/n : ')
-    if choix == 'n':
+    if choix == 'n' or choix == '':
         print('Paramètres non sauvegardés')
         return
 

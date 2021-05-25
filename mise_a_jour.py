@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from parametres import *
 
 def animation_du_quartier(L,x_c,y_c):
