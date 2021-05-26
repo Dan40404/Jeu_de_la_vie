@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import globals
 
 def get_densite_c_init():
@@ -39,3 +40,5 @@ def get_imunne_time():
     Fonction retournant le temps d'immunisation d'une cellule contenu dans le .csv 
     """
     return globals.parametre['imunne_time']
+
+

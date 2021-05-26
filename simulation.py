@@ -16,6 +16,11 @@ while True:
     get_parametres()
     parametres_nouveaux = parametrage_menu(globals.parametre)
     print()
+    print("NOS RECOMMANDATIONS POUR LA DUREE DES SIMULATIONS PRE-ENREGISTREES :")
+    print("- simulation_grande.csv : 60 ou plus", end='\n')
+    print("- onde.csv : 50 ou un peu moins ( correspond à la largeur/hauteur", end='\n')
+    print("- tranche_pasteque.csv : 40 ou un peu moins", end='\n')
+    print("- rapide.csv : 15", end='\n')
     nombre_jours = input("Combien de jours souhaitez-vous que la simulation dure ? : ")
     try:
         nombre_jours = int(nombre_jours)
@@ -42,7 +47,5 @@ while True:
     recommencer = input('Voulez-vous recommencer? o/n: ')
     if recommencer == 'n':
         break
-# TODO : apres modif dans mise_a_jour sur les differents temps, on ne peut contaminer et immuniser que l*L cellules donc pas normal
 
-# TODO : maintenant, on contamine que L*l et toutes les valeurs décroissent jusqu'à 0 et ne remontent jamais
 

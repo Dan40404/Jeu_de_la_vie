@@ -31,6 +31,8 @@ def choisir_fichier():
                 demander = True
             else:
                 try: # on regarde si le numéro entré correspond bien à un fichier
+                    liste_fichiers[numero]
+                    print("Vous avez choisi :", liste_fichiers[numero])
                     return liste_fichiers[numero]
                 except:
                     print("ce numéro n'existe pas!")
@@ -52,12 +54,18 @@ def get_parametres():
 
     #on parcoure chaque ligne
     for ligne in fichier_demander:
+        # on ne prend que les lignes avec deux éléments(bug d'une ligne vide à la fin)
         try:
-            #l'element 0 correspond au parametre et l'element 1 à sa valeur
-            #on utilise un try excepte car certaines valeur sont compris entre 0 et 1, ce ne sont pas des int, donc si il y'a une erreur on les ajoutes en tant que float
-            Parametres_grille[(ligne[0])] = int(ligne[1])
+            try: # capture l'exception si la conversion en INT est pas possible
+                #l'element 0 correspond au parametre et l'element 1 à sa valeur
+                #on utilise un try excepte car certaines valeur sont compris entre 0 et 1, ce ne sont pas des int, donc si il y'a une erreur on les ajoutes en tant que float
+                Parametres_grille[(ligne[0])] = int(ligne[1])
+            except: # va lever une exception si ligne1 n'est pas possible, capturee par le try le plus haut
+                Parametres_grille[(ligne[0])] = float(ligne[1])
         except:
-            Parametres_grille[(ligne[0])] = float(ligne[1])
+            # si on a pas deux éléments, on passe a la ligne suivante
+            pass
+        
     globals.parametre = Parametres_grille
 
 
