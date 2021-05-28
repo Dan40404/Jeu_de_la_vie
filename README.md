@@ -19,13 +19,41 @@ Arboresence :
         ├── README.md
         └── simulation.py
 
+Version : 1.0
+
+--------------I - Execution du Jeu--------------
+
+Afin d'éxecuter le jeu, il vous faudra installer les modules suivant :
+- csv
+utilité : manipulation de fichier csv pour lancer le jeu dans différentes configuration
+
+Après cela fait, lancer le fichier simulation.py 
+------------------------------------------------
 
 
+--------------II - Paramétrages du Jeu--------------
 
+Lors du lancement, vous devrez choisir entre plusieurs mode :
+[1] meutrier : beaucoup d'inféctées | la maladie possède un fort taux de mortalité
+[2] onde: la propagation de l'épidémie forme une belle onde
+[3] rapide : La maladie se propage très vite
+[4] simulation_grande : réalisation d'une simulation sur une population importante de cellules
+[5] test : Mode basique, parfait pour initialiser les joueurs débutants à nos simulations
+[6] tranche_pasteque : la propagation de l'épidémie forme une tranche ressemblant à une tranche de pastèque (ou à une demi-lune)
 
+Les paramètres peuvent par la suite êtres modifiés si ils ne conviennent pas :
+0 ... largeur : nombre de cellule par ligne
+1 ... hauteur : nombre de ligne
+2 ... densite_c_init : nombre de cellule contaminées au départ de l'épidémie
+3 ... proba_infect : probabilitée d'infection d'une cellule voisine
+4 ... J_avant_G : Nombre de jour avant qu'une cellule inféctée devienne immunisée/meurt
+5 ... taux_mortal : taux de mortalité de la maladie
+6 ... densité_conf : densité de confinement
+7 ... imunne_time : temps d'immunité d'une cellule
 
-
-
+Le joueur définit ensuite le nombre de jour de l'épidémie, puis il lance la simulation
+Si il le souhaite, il peut modifier certains paramètres de la simulation pour créer un nouveau fichier csv qu'il pourra utiliser par la suite en tant que paramètre déja définit
+----------------------------------------------------
 
 
 LISTE DES MODES IDEES :
