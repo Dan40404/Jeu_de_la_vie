@@ -26,6 +26,7 @@ Version : 1.0
 Afin d'éxecuter le jeu, il vous faudra installer les modules suivant :
 - csv
 utilité : manipulation de fichier csv pour lancer le jeu dans différentes configuration
+NOTE: lancer le jeu dans un terminal de commandes Linux pour avoir les couleurs ( ni la console Spyder, ni l'invite de commandes Windows ni un terminal bash installé sur Windows ne permet d'obtenir un affichage en couleur ).
 
 Après cela fait, lancer le fichier simulation.py 
 ------------------------------------------------
